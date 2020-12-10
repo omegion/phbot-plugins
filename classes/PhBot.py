@@ -203,10 +203,12 @@ class PhBot(object):
 
     def _get_db(self):
         db_file = self.get_db_file()
-        conn = None
-        try:
-            conn = sqlite3.connect(db_file, check_same_thread=False)
-        except Error as e:
-            self.exception(e)
+        if db_file:
+            conn = None
+            try:
+                conn = sqlite3.connect(db_file, check_same_thread=False)
+            except Error as e:
+                self.exception(e)
 
-        return conn
+            return conn
+        return None
