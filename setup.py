@@ -97,7 +97,7 @@ class Setup(object):
         self._detect_installed_plugins()
 
         QtBind.createLabel(self.gui, self.__init__.__doc__, 10, 10)
-        QtBind.createButton(gui, 'install_plugins', "Install/Update Plugins", 10, len(ACTIVE_PLUGINS) * 28)
+        QtBind.createButton(gui, 'install_plugins', "Install/Update Plugins", 10, len(ACTIVE_PLUGINS) * 32)
 
         for key, element in enumerate(ACTIVE_PLUGINS):
             ACTIVE_PLUGINS[key]['id'] = QtBind.createCheckBox(gui, 'empty', element.get('description'), 10,
