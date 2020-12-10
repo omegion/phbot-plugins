@@ -17,14 +17,14 @@ def exception_handler(func):
 
 
 class BasePlugin(object):
-    def __init__(self, plugin_name=None, token=None):
+    def __init__(self, plugin_name=None, token=None, config=None):
         self.bot = PhBot(plugin_name=plugin_name)
         self.api = APIConnector(bot=self.bot, token=token)
         self.loop_buffers = {}
 
         self.plugin_name = plugin_name
 
-        self.config = Config()
+        self.config: Config = None
         self.char = Character()
 
     def set_char(self, char: Character):
@@ -58,6 +58,9 @@ class BasePlugin(object):
         pass
 
     def handle_joymax(self, opcode, data):
+        pass
+
+    def handle_chat(self, t, player, msg):
         pass
 
     def setup(self):

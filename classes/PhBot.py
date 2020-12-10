@@ -1,8 +1,11 @@
+import json
 import logging
 import math
 import sqlite3
 from sqlite3 import Error
 from threading import Timer
+
+from classes.Chatter import Chatter
 
 logging.basicConfig(filename='plugin.log', level=logging.DEBUG,
                     format='%(asctime)s %(threadName)s %(plugin)s %(levelname)s %(name)s %(message)s')
@@ -25,7 +28,17 @@ class PhBot(object):
         self.bot = self._get_bot()
         self.qt = self._get_qt()
         self.db = self._get_db()
+        self.chat = self._get_chat()
         self.plugin_name = plugin_name
+
+    # CONFIG
+    def get_config(self):
+        with open(self.get_config_path(), 'r') as f:
+            return json.load(f)
+
+    def set_config(self, config: dict):
+        with open(self.get_config_path(), "w") as f:
+            f.write(json.dumps(config, indent=4, sort_keys=True))
 
     # DATABASE
     def db_update_pick_filter(self):
@@ -76,6 +89,12 @@ class PhBot(object):
     def set_profile(self, profile_name):
         if self.bot:
             self.bot.set_profile(profile_name)
+            return True
+        return None
+
+    def set_training_radius(self, r):
+        if self.bot:
+            self.bot.set_training_radius(r)
             return True
         return None
 
@@ -154,6 +173,16 @@ class PhBot(object):
             return self.bot.get_version()
         return None
 
+    def start_trace(self, char_name):
+        if self.bot:
+            return self.bot.start_trace(char_name)
+        return None
+
+    def stop_trace(self):
+        if self.bot:
+            return self.bot.stop_trace()
+        return None
+
     # GUI
     def set_text(self, *args):
         if self.qt:
@@ -212,3 +241,6 @@ class PhBot(object):
 
             return conn
         return None
+
+    def _get_chat(self):
+        return Chatter().get_chatter()

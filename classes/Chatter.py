@@ -25,10 +25,7 @@ class FakeChat(object):
 
 
 class Chatter(object):
-    def __init__(self):
-        self.chat = self.get_chatter()
-
-    def get_chatter(self):
+    def get_chatter(self) -> FakeChat:
         try:
             import phBotChat
             return phBotChat

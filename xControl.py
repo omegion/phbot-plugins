@@ -329,7 +329,7 @@ def joined_game():
 # All chat messages received are sent to this function
 def handle_chat(t, player, msg):
     # Check player at leader list or a Discord message
-    if player and lstLeaders_exist(player) or t == 4:
+    if player and lstLeaders_exist(player) and t == 40:
         # Parsing message command
         if msg == "START":
             start_bot()

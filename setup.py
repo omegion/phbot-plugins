@@ -26,13 +26,8 @@ ACTIVE_PLUGINS = [
     },
     {
         'id': None,
-        'name': 'o_controlz',
-        'description': 'A Control plugin to help control your bot with in-game chat.',
-    },
-    {
-        'id': None,
-        'name': 'o_controly',
-        'description': 'A Control plugin to help control your bot with in-game chat.',
+        'name': 'o_ch_force_helper',
+        'description': 'A helper plugin for CH force chars.',
     },
 ]
 
@@ -43,7 +38,6 @@ class Setup(object):
 
         self.gui = gui
         self.installed_plugins = []
-        self.plugin_folder = 'Plugins'
         self.headers = {
             'content-type': 'application/json',
         }
@@ -55,10 +49,9 @@ class Setup(object):
                 plugin.download_plugin(element.get('name'), latest_version)
 
     def install_classes(self) -> str:
-        latest_version = "master"
+        latest_version = self.get_latest_version()
         try:
             from classes import VERSION
-            latest_version = self.get_latest_version()
             if VERSION != latest_version:
                 self.log('Classes has new version {}, will update.'.format(latest_version))
                 self.download_classes()
@@ -76,7 +69,7 @@ class Setup(object):
             self._extract_files(zipfile.ZipFile(BytesIO(resp.read())))
             self.log('Classes updated.')
         except Exception as err:
-            pass
+            self.log(err)
 
     def download_plugin(self, plugin_name: str, classes_version: str) -> None:
         url = "https://raw.githubusercontent.com/omegion/phbot-plugins/{}/{}.py".format(
@@ -96,7 +89,7 @@ class Setup(object):
         try:
             resp = urllib.request.urlopen(req)
         except Exception as err:
-            return None
+            return "master"
 
         body = json.loads(resp.read().decode(resp.info().get_param('charset') or 'utf-8'))
         return body.get('tag_name', None)
@@ -127,12 +120,14 @@ class Setup(object):
             from classes import VERSION
             latest_version = self.get_latest_version()
             if VERSION == latest_version:
-                print('Classes has updated.')
+                self.log('classes has updated.')
         except ImportError:
             pass
 
     def _clean_up_folder(self) -> None:
-        shutil.rmtree(PLUGINS_PATH + '/classes')
+        classes_path = os.path.join(PLUGINS_PATH, 'classes')
+        if os.path.exists(classes_path):
+            shutil.rmtree(classes_path)
 
     def _extract_files(self, zip_file) -> None:
         zip_file.extractall(PLUGINS_PATH)
