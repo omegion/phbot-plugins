@@ -1,6 +1,6 @@
 import QtBind
 
-from Plugins.classes.plugins.Downloader import Downloader
+from classes.plugins.Downloader import Downloader
 
 gui = QtBind.init(__name__, Downloader.__name__)
 

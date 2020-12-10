@@ -8,11 +8,8 @@ plugin = ForceTools(
     gui=gui,
 )
 
-try:
-    plugin.setup()
+plugin.setup()
 
 
-    def save():
-        plugin.save()
-except Exception as e:
-    plugin.bot.exception(e)
+def save():
+    plugin.save()

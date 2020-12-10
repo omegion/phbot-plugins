@@ -1,7 +1,8 @@
 import QtBind
+from classes.NameGenerator import NameGenerator
 from phBot import *
 
-from classes.NameGenerator import NameGenerator
+from Plugins.classes.NameGenerator import NameGenerator
 
 gui = QtBind.init(__name__, 'Name Generator')
 

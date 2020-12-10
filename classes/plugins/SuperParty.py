@@ -1,7 +1,6 @@
 import struct
 
-from classes.Discord import DiscordMessage
-from classes.PhBot import EVENT_HUNTER_SPAWN
+from Plugins.classes.PhBot import EVENT_HUNTER_SPAWN
 from classes.plugins.BasePlugin import BasePlugin, exception_handler
 
 
@@ -82,7 +81,6 @@ class SuperParty(BasePlugin):
                                 )
 
     def notify(self, title: str, text: str):
-        DiscordMessage(title, text).send()
         self.bot.log('Discord message sent: {}'.format(text))
 
     @exception_handler

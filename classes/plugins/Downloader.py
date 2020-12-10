@@ -1,6 +1,6 @@
 import urllib
 
-from Plugins.classes.plugins.BasePlugin import BasePlugin
+from classes.plugins.BasePlugin import BasePlugin
 
 
 class Downloader(BasePlugin):

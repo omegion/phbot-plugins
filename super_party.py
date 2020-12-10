@@ -2,8 +2,6 @@ import QtBind
 
 from classes.plugins.SuperParty import SuperParty
 
-TOKEN = "Nzc4MzM3NTA1NjY1NDgyODIy.X7QhSg.9ac1cs01XuysMMEPwYfdwo2tKw0"
-
 gui = QtBind.init(__name__, SuperParty.__name__)
 
 plugin = SuperParty(
