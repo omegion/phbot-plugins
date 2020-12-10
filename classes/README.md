@@ -1,5 +1,6 @@
-phBot methods
+## phBot methods
 
+```
 log
 get_server
 get_gateway
@@ -63,9 +64,10 @@ show_notification
 play_wav
 generate_path
 get_zone_name
-
+```
 
 ## GUI
+```
 [
     "__loader__", 
     "append", 
@@ -89,6 +91,4 @@ get_zone_name
     "setText", 
     "text"
 ]
-
-# Making symlink 
-mklink /D C:\Users\Hakan\AppData\Local\Programs\phBot\Plugins\python38 C:\Users\Hakan\AppData\Local\Programs\Python\Python382020-11-21 21:41:10,456 setup ERROR classes.PhBot No module named 'discord'
+```
