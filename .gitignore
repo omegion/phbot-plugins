@@ -1,0 +1,8 @@
+# IDE
+.idea
+
+# Python
+python38
+__pycache__/
+*.py[cod]
+*.pyc

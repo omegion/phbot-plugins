@@ -1,0 +1,94 @@
+phBot methods
+
+log
+get_server
+get_gateway
+inject_joymax
+inject_silkroad
+get_character_data
+get_client
+get_startup_data
+get_position
+get_active_skills
+get_inventory
+get_storage
+get_guild_storage
+get_job_pouch
+get_drops
+get_quests
+get_players
+get_party
+get_party_union
+get_npcs
+get_pets
+get_monsters
+get_taxi
+get_academy
+get_weapons
+get_npc_goods
+get_guild
+get_guild_union
+start_bot
+stop_bot
+start_trace
+stop_trace
+disconnect
+reconnect
+get_config_path
+get_config_dir
+get_log_dir
+get_encoding
+get_locale
+get_item
+get_item_string
+get_monster
+get_monster_string
+get_teleport_data
+set_training_script
+set_training_position
+set_training_radius
+get_training_position
+get_training_area
+get_command_line_args
+get_status
+move_to
+move_to_region
+get_version
+set_profile
+get_profile
+select_character
+reload_profile
+use_return_scroll
+show_notification
+play_wav
+generate_path
+get_zone_name
+
+
+## GUI
+[
+    "__loader__", 
+    "append", 
+    "clear", 
+    "createButton", 
+    "createCheckBox", 
+    "createCombobox", 
+    "createLabel", 
+    "createLineEdit", 
+    "createList", 
+    "currentIndex", 
+    "destroy", 
+    "getItems", 
+    "init", 
+    "isChecked", 
+    "move", 
+    "remove", 
+    "removeAt", 
+    "setChecked", 
+    "setEnabled", 
+    "setText", 
+    "text"
+]
+
+# Making symlink 
+mklink /D C:\Users\Hakan\AppData\Local\Programs\phBot\Plugins\python38 C:\Users\Hakan\AppData\Local\Programs\Python\Python382020-11-21 21:41:10,456 setup ERROR classes.PhBot No module named 'discord'
