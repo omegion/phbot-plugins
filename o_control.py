@@ -14,7 +14,6 @@ try:
 
 
     def handle_chat(t, player, msg):
-        # Check player at leader list or a Discord message
         plugin.handle_chat(t, player, msg)
 
 
