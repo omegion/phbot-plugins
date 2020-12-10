@@ -76,7 +76,6 @@ class Setup(object):
             classes_version,
             plugin_name
         )
-        self.log(url)
         try:
             urllib.request.urlretrieve(url, "{}/{}.py".format(PLUGINS_PATH, plugin_name))
             self.log('{} installed.'.format(plugin_name))

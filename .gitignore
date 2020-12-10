@@ -1,3 +1,11 @@
+# Soon
+classes/plugins/online_manager
+classes/plugins/trade
+classes/plugins/SuperParty.py
+classes/plugins/AutoTrade.py
+classes/APIConnector.py
+classes/NameGenerator.py
+
 # IDE
 .idea
 
