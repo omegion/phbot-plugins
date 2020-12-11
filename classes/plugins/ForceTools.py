@@ -1,7 +1,7 @@
 import json
 
 from classes import VERSION
-from classes.plugins.BasePlugin import BasePlugin
+from classes.plugins.BasePlugin import BasePlugin, exception_handler
 
 
 class ForceTools(BasePlugin):
@@ -17,6 +17,7 @@ class ForceTools(BasePlugin):
         self.active_skill_edit = None
         self.party_member_hp_edit = 50
 
+    @exception_handler
     def save(self):
         self.initialize()
 
@@ -86,6 +87,7 @@ class ForceTools(BasePlugin):
 
         self.bot.reload_config()
 
+    @exception_handler
     def setup(self):
         self.initialize()
 
@@ -97,3 +99,7 @@ class ForceTools(BasePlugin):
         self.active_skill_edit = self.bot.qt.createLineEdit(self.gui, str(active_skill), 6, 25, 180, 19)
         self.party_member_hp_edit = self.bot.qt.createLineEdit(self.gui, str(party_member_hp), 6, 55, 50, 19)
         self.bot.qt.createButton(self.gui, 'save', 'save', 95, 250)
+
+    @exception_handler
+    def joined_game(self):
+        self.initialize()

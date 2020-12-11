@@ -52,7 +52,7 @@ class BasePlugin(object):
         pass
 
     def joined_game(self):
-        self.setup()
+        pass
 
     def handle_event(self, t, data):
         pass
@@ -68,10 +68,9 @@ class BasePlugin(object):
 
     @exception_handler
     def initialize(self):
-        if not self.char.is_joined():
-            char_info = self.bot.get_character_data()
-            if char_info:
-                char = Character()
-                char.set(char_info)
-                self.set_char(char)
-                self.set_config()
+        char_info = self.bot.get_character_data()
+        if char_info:
+            char = Character()
+            char.set(char_info)
+            self.set_char(char)
+            self.set_config()

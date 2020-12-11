@@ -1,13 +1,14 @@
 import json
 import logging
 import math
+import os
 import sqlite3
 from sqlite3 import Error
 from threading import Timer
 
 from classes.Chatter import Chatter
 
-logging.basicConfig(filename='plugin.log', level=logging.DEBUG,
+logging.basicConfig(filename=os.path.join('Plugins', 'plugin.log'), level=logging.DEBUG,
                     format='%(asctime)s %(threadName)s %(plugin)s %(levelname)s %(name)s %(message)s')
 logger = logging.getLogger(__name__)
 

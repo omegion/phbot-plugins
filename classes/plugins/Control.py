@@ -53,8 +53,6 @@ class Control(BasePlugin):
     @exception_handler
     def setup(self):
         self.initialize()
-
-        # GUI Inits
         self.bot.qt.createLabel(self.gui, self.__init__.__doc__, 10, 10)
         self.bot.qt.createLabel(self.gui, VERSION, 680, 270)
         self.leader_input = self.bot.qt.createLineEdit(self.gui, "", 10, 30, 100, 20)
@@ -64,7 +62,12 @@ class Control(BasePlugin):
         self.bot.qt.createButton(self.gui, 'get_position_button_action', "Get Position", 10, 255)
         self._command_labels()
 
-        # Config
+        if self.char.is_joined():
+            self._load_leaders_from_config()
+
+    @exception_handler
+    def joined_game(self):
+        self.initialize()
         self._load_leaders_from_config()
 
     @exception_handler
@@ -87,10 +90,6 @@ class Control(BasePlugin):
 
             elif msg.startswith("VERSION"):
                 self._version(t, player, msg)
-
-    @exception_handler
-    def joined_game(self):
-        self.setup()
 
     def add_leader(self):
         player = self.bot.qt.text(self.gui, self.leader_input)
