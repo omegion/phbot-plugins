@@ -17,6 +17,10 @@ try:
         plugin.handle_chat(t, player, msg)
 
 
+    def get_position_button_action():
+        plugin.get_position()
+
+
     def add_leader_button_action():
         plugin.add_leader()
 

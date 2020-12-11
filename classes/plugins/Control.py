@@ -21,11 +21,12 @@ class Control(BasePlugin):
         self.initialize()
 
         # GUI Inits
-        self.bot.qt.createButton(self.gui, 'test', 'Test', 10, 250)
-        self.leader_input = self.bot.qt.createLineEdit(self.gui, "", 511, 11, 100, 20)
-        self.leaders_list = self.bot.qt.createList(self.gui, 511, 32, 176, 48)
-        self.bot.qt.createButton(self.gui, 'add_leader_button_action', "Add", 612, 10)
-        self.bot.qt.createButton(self.gui, 'remove_leader_button_action', "Remove", 560, 79)
+        self.bot.qt.createLabel(self.gui, self.__init__.__doc__, 10, 10)
+        self.leader_input = self.bot.qt.createLineEdit(self.gui, "", 10, 30, 100, 20)
+        self.leaders_list = self.bot.qt.createList(self.gui, 10, 58, 175, 48)
+        self.bot.qt.createButton(self.gui, 'add_leader_button_action', "Add", 112, 28)
+        self.bot.qt.createButton(self.gui, 'remove_leader_button_action', "Remove", 10, 110)
+        self.bot.qt.createButton(self.gui, 'get_position_button_action', "Get Position", 10, 255)
 
         # Config
         self._load_leaders_from_config()
@@ -71,6 +72,14 @@ class Control(BasePlugin):
                 self.config.set('leaders', leaders)
                 self.bot.qt.remove(self.gui, self.leaders_list, selected_leader)
 
+    def get_position(self):
+        pos = self.bot.get_position()
+        if pos:
+            self.bot.log(
+                "Current position: X: %.0f, Y: %.0f, Z: %.0f, Region: %d" %
+                (pos['x'], pos['y'], pos['z'], pos['region'])
+            )
+
     def _load_leaders_from_config(self):
         leaders = self.config.get('leaders')
         if leaders:
@@ -91,13 +100,16 @@ class Control(BasePlugin):
         self._send_response('Stopped the bot', t, player, msg)
 
     def _set_area(self, t, player, msg):
+        self.bot.log(self.bot.get_position())
+
         params = self._parse_message_arguments(msg)
-        if not params.get('x', None) or not params.get('y', None):
+        if not params.get('x', None) or not params.get('y', None) or not params.get('y', None):
             self._send_response('X or Y missing', t, player, msg)
             return
 
         x = int(params.get('x'))
         y = int(params.get('y'))
+        region = int(params.get('region'))
         radius = int(params.get('r', 30))
 
         bot_config = self.bot.get_config()
@@ -107,11 +119,12 @@ class Control(BasePlugin):
             bot_config['Loop']['Script'][training_area_name]['Enabled'] = False
 
         bot_config['Loop']['Script']['default'] = {
+            "Data": [],
             "Enabled": True,
             "Path": "",
             "Pick Radius": 50,
             "Radius": radius,
-            "Region": 0,
+            "Region": region,
             "Type": 0,
             "X": x,
             "Y": y,

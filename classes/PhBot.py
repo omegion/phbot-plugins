@@ -183,6 +183,11 @@ class PhBot(object):
             return self.bot.stop_trace()
         return None
 
+    def generate_path(self, x, y):
+        if self.bot:
+            return self.bot.generate_path(x, y)
+        return None
+
     # GUI
     def set_text(self, *args):
         if self.qt:
