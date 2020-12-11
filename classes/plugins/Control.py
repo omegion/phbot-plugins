@@ -1,6 +1,7 @@
 from urllib import parse
 from urllib.parse import parse_qs
 
+from classes import VERSION
 from classes.plugins.BasePlugin import BasePlugin, exception_handler
 
 
@@ -22,6 +23,7 @@ class Control(BasePlugin):
 
         # GUI Inits
         self.bot.qt.createLabel(self.gui, self.__init__.__doc__, 10, 10)
+        self.bot.qt.createLabel(self.gui, VERSION, 680, 270)
         self.leader_input = self.bot.qt.createLineEdit(self.gui, "", 10, 30, 100, 20)
         self.leaders_list = self.bot.qt.createList(self.gui, 10, 58, 175, 48)
         self.bot.qt.createButton(self.gui, 'add_leader_button_action', "Add", 112, 28)
@@ -151,13 +153,13 @@ class Control(BasePlugin):
 
     def _status(self, t, player, msg):
         client_status = self.bot.get_client()
-        response = {
+        status = {
             'bot': True if self.bot.get_status() else False,
             'client': client_status.get('running', True)
         }
-
+        response = "Botting: %s, Client: %s" % (status['bot'], status['client'])
         self.bot.log(response)
-        self._send_response("Status: {}".format(str(response)), t, player, msg)
+        self._send_response(str(response), t, player, msg)
 
     def _send_response(self, text, t, player, msg):
         self.bot.log(text)
