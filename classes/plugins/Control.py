@@ -21,6 +21,11 @@ COMMANDS = [
         'arguments': ['x', 'y', 'region', 'r']
     },
     {
+        'name': 'SETRADIUS',
+        'description': 'Sets new new radius value for "default".',
+        'arguments': ['r']
+    },
+    {
         'name': 'RETURN TOWN',
         'description': 'Uses return scroll',
         'arguments': []
@@ -82,6 +87,9 @@ class Control(BasePlugin):
             elif msg.startswith("SETAREA"):
                 self._set_area(t, player, msg)
 
+            elif msg.startswith("SETRADIUS"):
+                self._set_radius(t, player, msg)
+
             elif msg.startswith("RETURN TOWN"):
                 self._return_town(t, player, msg)
 
@@ -142,11 +150,9 @@ class Control(BasePlugin):
         self._send_response('Stopped the bot', t, player, msg)
 
     def _set_area(self, t, player, msg):
-        self.bot.log(self.bot.get_position())
-
         params = self._parse_message_arguments(msg)
         if not params.get('x', None) or not params.get('y', None) or not params.get('y', None):
-            self._send_response('X or Y missing', t, player, msg)
+            self._send_response('X, Y or Region is missing', t, player, msg)
             return
 
         x = int(params.get('x'))
@@ -184,8 +190,19 @@ class Control(BasePlugin):
             player,
             msg
         )
+        self.bot.log(self.bot.get_position())
 
-        pass
+    def _set_radius(self, t, player, msg):
+        params = self._parse_message_arguments(msg)
+        if not params.get('r', None):
+            self._send_response('R is missing', t, player, msg)
+            return
+
+        r = int(params.get('r'))
+
+        self.bot.set_training_radius(r)
+
+        self._send_response('Radius set to %d' % r, t, player, msg)
 
     def _return_town(self, t, player, msg):
         self.bot.use_return_scroll()
