@@ -152,13 +152,11 @@ class Control(BasePlugin):
         self._send_response('Returning to town', t, player, msg)
 
     def _status(self, t, player, msg):
-        client_status = self.bot.get_client()
         status = {
             'bot': True if self.bot.get_status() else False,
-            'client': client_status.get('running', True)
+            'version': VERSION
         }
-        response = "Botting: %s, Client: %s" % (status['bot'], status['client'])
-        self.bot.log(response)
+        response = "Botting: %s, Version: %s" % (status['bot'], status['client'])
         self._send_response(str(response), t, player, msg)
 
     def _send_response(self, text, t, player, msg):
