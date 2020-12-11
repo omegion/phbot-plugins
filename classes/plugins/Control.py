@@ -45,6 +45,9 @@ class Control(BasePlugin):
             elif msg.startswith("RETURN TOWN"):
                 self._return_town(t, player, msg)
 
+            elif msg.startswith("STATUS"):
+                self._status(t, player, msg)
+
     def add_leader(self):
         player = self.bot.qt.text(self.gui, self.leader_input)
 
@@ -132,6 +135,16 @@ class Control(BasePlugin):
     def _return_town(self, t, player, msg):
         self.bot.use_return_scroll()
         self._send_response('Returning to town', t, player, msg)
+
+    def _status(self, t, player, msg):
+        client_status = self.bot.get_client()
+        response = {
+            'bot': True if self.bot.get_status() else False,
+            'client': client_status.get('running', True)
+        }
+
+        self.bot.log(response)
+        self._send_response("Status: {}".format(str(response)), t, player, msg)
 
     def _send_response(self, text, t, player, msg):
         self.bot.log(text)
