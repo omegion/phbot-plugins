@@ -17,6 +17,10 @@ try:
         plugin.handle_chat(t, player, msg)
 
 
+    def joined_game():
+        plugin.joined_game()
+
+
     def get_position_button_action():
         plugin.get_position()
 

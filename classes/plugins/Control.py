@@ -4,6 +4,39 @@ from urllib.parse import parse_qs
 from classes import VERSION
 from classes.plugins.BasePlugin import BasePlugin, exception_handler
 
+COMMANDS = [
+    {
+        'name': 'START',
+        'description': 'Starts the bot',
+        'arguments': []
+    },
+    {
+        'name': 'STOP',
+        'description': 'Stops the bot',
+        'arguments': []
+    },
+    {
+        'name': 'SETAREA',
+        'description': 'Sets new training area with name "default".',
+        'arguments': ['x', 'y', 'region', 'r']
+    },
+    {
+        'name': 'RETURN TOWN',
+        'description': 'Uses return scroll',
+        'arguments': []
+    },
+    {
+        'name': 'STATUS',
+        'description': 'Shows bot status.',
+        'arguments': []
+    },
+    {
+        'name': 'VERSION',
+        'description': 'Shows bot and plugin versions.',
+        'arguments': []
+    },
+]
+
 
 class Control(BasePlugin):
     def __init__(self, gui=None):
@@ -29,6 +62,7 @@ class Control(BasePlugin):
         self.bot.qt.createButton(self.gui, 'add_leader_button_action', "Add", 112, 28)
         self.bot.qt.createButton(self.gui, 'remove_leader_button_action', "Remove", 10, 110)
         self.bot.qt.createButton(self.gui, 'get_position_button_action', "Get Position", 10, 255)
+        self._command_labels()
 
         # Config
         self._load_leaders_from_config()
@@ -53,6 +87,10 @@ class Control(BasePlugin):
 
             elif msg.startswith("VERSION"):
                 self._version(t, player, msg)
+
+    @exception_handler
+    def joined_game(self):
+        self.setup()
 
     def add_leader(self):
         player = self.bot.qt.text(self.gui, self.leader_input)
@@ -181,3 +219,12 @@ class Control(BasePlugin):
         query = parse.urlsplit("?" + corrected_message).query
         parameters = dict(parse_qs(query))
         return {k: v[0] for k, v in parameters.items()}
+
+    def _command_labels(self):
+        for key, command in enumerate(COMMANDS):
+            description = "%s" % command['name']
+            if len(command['arguments']):
+                description += '(' + ', '.join(command['arguments']) + ')'
+
+            description += ': %s' % command['description']
+            self.bot.qt.createLabel(self.gui, description, 210, (28 * (key + 1)))
