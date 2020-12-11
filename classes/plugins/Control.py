@@ -48,15 +48,16 @@ class Control(BasePlugin):
     def add_leader(self):
         player = self.bot.qt.text(self.gui, self.leader_input)
 
-        leaders = self.config.get('leaders')
-        if leaders:
-            leaders.append(player)
-        else:
-            leaders = [player]
+        if player:
+            leaders = self.config.get('leaders')
+            if leaders:
+                leaders.append(player)
+            else:
+                leaders = [player]
 
-        self.config.set('leaders', leaders)
-        self.bot.qt.append(self.gui, self.leaders_list, player)
-        self.bot.qt.setText(self.gui, self.leader_input, "")
+            self.config.set('leaders', leaders)
+            self.bot.qt.append(self.gui, self.leaders_list, player)
+            self.bot.qt.setText(self.gui, self.leader_input, "")
 
     def remove_leader(self):
         selected_leader = self.bot.qt.text(self.gui, self.leaders_list)

@@ -95,5 +95,3 @@ class ForceTools(BasePlugin):
         self.party_member_hp_edit = self.bot.qt.createLineEdit(self.gui, str(party_member_hp), 6, 55, 50, 19)
         self.bot.qt.createLabel(self.gui, self.__init__.__doc__, 10, 10)
         self.bot.qt.createButton(self.gui, 'save', 'save', 95, 250)
-
-        self.bot.log('loaded')

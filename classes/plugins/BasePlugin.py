@@ -52,7 +52,7 @@ class BasePlugin(object):
         pass
 
     def joined_game(self):
-        pass
+        self.setup()
 
     def handle_event(self, t, data):
         pass
