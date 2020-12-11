@@ -51,6 +51,9 @@ class Control(BasePlugin):
             elif msg.startswith("STATUS"):
                 self._status(t, player, msg)
 
+            elif msg.startswith("VERSION"):
+                self._version(t, player, msg)
+
     def add_leader(self):
         player = self.bot.qt.text(self.gui, self.leader_input)
 
@@ -154,9 +157,16 @@ class Control(BasePlugin):
     def _status(self, t, player, msg):
         status = {
             'bot': True if self.bot.get_status() else False,
-            'version': VERSION
         }
-        response = "Botting: %s, Version: %s" % (status['bot'], status['client'])
+        response = "Botting: %s" % status['bot']
+        self._send_response(str(response), t, player, msg)
+
+    def _version(self, t, player, msg):
+        status = {
+            'bot': self.bot.get_version(),
+            'plugin': VERSION
+        }
+        response = "Bot: %s, Plugin: %s" % (status['bot'], status['plugin'])
         self._send_response(str(response), t, player, msg)
 
     def _send_response(self, text, t, player, msg):
