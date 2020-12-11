@@ -30,8 +30,6 @@ class Control(BasePlugin):
         # Config
         self._load_leaders_from_config()
 
-        self.bot.log('loaded')
-
     @exception_handler
     def handle_chat(self, t, player, msg):
         if player and self._is_leader(player):
