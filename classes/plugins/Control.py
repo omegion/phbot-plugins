@@ -205,7 +205,11 @@ class Control(BasePlugin):
         self._send_response('Radius set to %d' % r, t, player, msg)
 
     def _return_town(self, t, player, msg):
-        self.bot.use_return_scroll()
+        character = self.bot.get_character_data()
+        if character['hp'] == 0:
+            self.bot.inject_joymax(0x3053, b'\x01', False)
+        else:
+            self.bot.use_return_scroll()
         self._send_response('Returning to town', t, player, msg)
 
     def _status(self, t, player, msg):

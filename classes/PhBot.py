@@ -189,6 +189,11 @@ class PhBot(object):
             return self.bot.generate_path(x, y)
         return None
 
+    def inject_joymax(self, opcode, data, encrypted):
+        if self.bot:
+            return self.bot.inject_joymax(opcode, data, encrypted)
+        return None
+
     # GUI
     def set_text(self, *args):
         if self.qt:
