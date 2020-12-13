@@ -190,7 +190,6 @@ class Control(BasePlugin):
             player,
             msg
         )
-        self.bot.log(self.bot.get_position())
 
     def _set_radius(self, t, player, msg):
         params = self._parse_message_arguments(msg)

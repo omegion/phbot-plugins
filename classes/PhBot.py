@@ -38,7 +38,7 @@ class PhBot(object):
             return json.load(f)
 
     def set_config(self, config: dict):
-        with open(self.get_config_path(), "w") as f:
+        with open(self.get_config_path(), "w", encoding="utf8") as f:
             f.write(json.dumps(config, indent=4, sort_keys=True))
 
     # DATABASE
