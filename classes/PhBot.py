@@ -34,12 +34,12 @@ class PhBot(object):
 
     # CONFIG
     def get_config(self):
-        with open(self.get_config_path(), 'r', encoding="utf8") as f:
-            return json.load(f)
+        with open(self.get_config_path(), 'r') as f:
+            return json.load(f, encoding="utf8", ensure_ascii=False)
 
     def set_config(self, config: dict):
-        with open(self.get_config_path(), "w", encoding="utf8") as f:
-            f.write(json.dumps(config, indent=4, sort_keys=True))
+        with open(self.get_config_path(), "w") as f:
+            f.write(json.dumps(config, indent=4, sort_keys=True, encoding="utf8", ensure_ascii=False))
 
     # DATABASE
     def db_update_pick_filter(self):
