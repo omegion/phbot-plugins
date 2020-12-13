@@ -34,8 +34,8 @@ class PhBot(object):
 
     # CONFIG
     def get_config(self):
-        with open(self.get_config_path(), 'r') as f:
-            return json.load(f, encoding="utf8", ensure_ascii=False)
+        with open(self.get_config_path(), 'r', encoding='utf8') as f:
+            return json.load(f)
 
     def set_config(self, config: dict):
         with open(self.get_config_path(), "w") as f:
