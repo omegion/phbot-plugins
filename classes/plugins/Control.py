@@ -31,11 +31,6 @@ COMMANDS = [
         'arguments': []
     },
     {
-        'name': 'LEAVE PARTY',
-        'description': 'Leave the party if you have one',
-        'arguments': []
-    },
-    {
         'name': 'STATUS',
         'description': 'Shows bot status.',
         'arguments': []
@@ -97,9 +92,6 @@ class Control(BasePlugin):
 
             elif msg.startswith("RETURN TOWN"):
                 self._return_town(t, player, msg)
-
-            elif msg.startswith("LEAVE PARTY"):
-                self._leave_party(t, player, msg)
 
             elif msg.startswith("STATUS"):
                 self._status(t, player, msg)
@@ -210,11 +202,6 @@ class Control(BasePlugin):
         self.bot.set_training_radius(r)
 
         self._send_response('Radius set to %d' % r, t, player, msg)
-
-    def _leave_party(self, t, player, msg):
-        if self.bot.get_party():
-            self.bot.inject_joymax(0x7061, b'', False)
-            self._send_response('Left the party', t, player, msg)
 
     def _return_town(self, t, player, msg):
         character = self.bot.get_character_data()
